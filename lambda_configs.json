@@ -1,0 +1,13 @@
+{
+    "runtime" : "java",
+    "timeout" : 15,
+    "memory-size": 256,
+    "region" : "eu-west-1",
+    "zip-file": "target/email-lambdas.jar",
+    "role": "arn:aws:iam::<YOUR_AWS_USER_ID>:role/lambdafn",
+    "functions_comment": "its formatted as <handler>:<function-name>",
+    "functions": [
+        "email-lambdas.cmd.Subscribe:subscribe",
+        "email-lambdas.cmd.Unsubscribe:unsubscribe"
+    ]
+}
