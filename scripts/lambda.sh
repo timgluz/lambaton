@@ -102,14 +102,14 @@ function load_settings(){
 
 function update_all(){
   local fn_parts=()
-  local fn_name=''
-  for fn in "${fns[@]}"
+  local fn_names=$(jq_match '.functions|keys')
+
+  #echo $fn_names
+  for fn_name in $fn_names
   do
-    fn_parts=( ${fn//:/ }  ) #splits full function-name to handler and fn-name
-    fn_name="${fn_parts[1]}"
-    if [ -n "$fn_name" ]
+    if [ -n $fn_name ] && [ $fn_name != "[" ] && [ $fn_name != "]"  ]
     then
-      update_fn $fn_name
+      update_fn ${fn_name//[-+=.,\"]/} #remove not allowed characters from name
     fi
   done
 }
